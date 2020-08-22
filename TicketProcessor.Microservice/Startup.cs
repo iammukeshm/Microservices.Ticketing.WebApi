@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GreenPipes;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System;
+using TicketProcessor.Microservice.Consumers;
 
-namespace Ticketing.Microservice
+namespace TicketProcessor.Microservice
 {
     public class Startup
     {
@@ -28,15 +24,22 @@ namespace Ticketing.Microservice
         {
             services.AddMassTransit(x =>
             {
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                x.AddConsumer<TicketConsumer>();
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.UseHealthCheck(provider);
+                    cfg.Host(new Uri("rabbitmq://localhost"), h =>
+             {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+                    cfg.ReceiveEndpoint("ticketQueue", ep =>
                     {
-                        config.UseHealthCheck(provider);
-                        config.Host(new Uri("rabbitmq://localhost"), h =>
-                        {
-                            h.Username("guest");
-                            h.Password("guest");
-                        });
-                    }));
+                        ep.PrefetchCount = 16;
+                        ep.UseMessageRetry(r => r.Interval(2, 100));
+                        ep.ConfigureConsumer<TicketConsumer>(provider);
+                    });
+                }));
             });
             services.AddMassTransitHostedService();
             services.AddControllers();

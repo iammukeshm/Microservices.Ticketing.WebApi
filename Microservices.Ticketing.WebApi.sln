@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketing.Microservice", "Ticketing.Microservice\Ticketing.Microservice.csproj", "{301DEE43-FADE-4F15-9D63-8292DAE784E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketProcessor.Microservice", "TicketProcessor.Microservice\TicketProcessor.Microservice.csproj", "{90FBAA57-4C21-4983-A8AF-F546C11EE5B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Models", "Shared.Models\Shared.Models.csproj", "{48059C81-FED9-4F0C-9EBF-976710272631}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{301DEE43-FADE-4F15-9D63-8292DAE784E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{301DEE43-FADE-4F15-9D63-8292DAE784E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{301DEE43-FADE-4F15-9D63-8292DAE784E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90FBAA57-4C21-4983-A8AF-F546C11EE5B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90FBAA57-4C21-4983-A8AF-F546C11EE5B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90FBAA57-4C21-4983-A8AF-F546C11EE5B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90FBAA57-4C21-4983-A8AF-F546C11EE5B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48059C81-FED9-4F0C-9EBF-976710272631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48059C81-FED9-4F0C-9EBF-976710272631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48059C81-FED9-4F0C-9EBF-976710272631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48059C81-FED9-4F0C-9EBF-976710272631}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

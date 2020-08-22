@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MassTransit;
-using Microsoft.AspNetCore.Http;
+﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using Ticketing.Microservice.Models;
+using Shared.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace Ticketing.Microservice.Controllers
 {
@@ -22,10 +19,15 @@ namespace Ticketing.Microservice.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTicket(Ticket ticket)
         {
-            Uri uri = new Uri("rabbitmq://localhost/ticket-queue");
-            var endPoint = await _bus.GetSendEndpoint(uri);
-            await endPoint.Send(ticket);
-            return Ok();
+            if (ticket != null)
+            {
+                ticket.BookedOn = DateTime.Now;
+                Uri uri = new Uri("rabbitmq://localhost/ticketQueue");
+                var endPoint = await _bus.GetSendEndpoint(uri);
+                await endPoint.Send(ticket);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }
