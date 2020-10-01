@@ -16,6 +16,8 @@ namespace Ticketing.Microservice.Controllers
         {
             _bus = bus;
         }
+        
+        // Below method will to create ticket
         [HttpPost]
         public async Task<IActionResult> CreateTicket(Ticket ticket)
         {
